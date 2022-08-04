@@ -13,13 +13,16 @@ class AppDelegate: FlutterAppDelegate {
       return false
     }
 
+    override func applicationWillFinishLaunching(_ notification: Notification) {
+        mainFlutterWindow.close()
+    }
+    
     override func applicationDidFinishLaunching(_ aNotification: Notification) {
       let controller: FlutterViewController =
         mainFlutterWindow?.contentViewController as! FlutterViewController
       popover.contentSize = NSSize(width: 360, height: 360) //change this to your desired size
       popover.contentViewController = controller //set the content view controller for the popover to flutter view controller
       statusBar = StatusBarController.init(popover)
-//      mainFlutterWindow.close() //close the default flutter window
       super.applicationDidFinishLaunching(aNotification)
     }
 }
