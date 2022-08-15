@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  static const MethodChannel _channel = MethodChannel('beeHive_channel');
+
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    _channel.setMethodCallHandler((call) async {
+      debugPrint('收到了 ${call.arguments}');
+    });
+
+    _channel.invokeMethod('getPlatformVersion').then((value) {
+      print('》》》》');
+      print(value);
+    });
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
