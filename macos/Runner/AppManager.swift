@@ -14,6 +14,7 @@ let appChannelName: String = "beeHive_channel"
 class AppManager {
     static let shared = AppManager()
     private var channel: FlutterMethodChannel?
+    let clipboard = ClipboardX()
     
     public func setupChannel(registry: FlutterPluginRegistry) {
         let res = registry.registrar(forPlugin: appRegistryName)
