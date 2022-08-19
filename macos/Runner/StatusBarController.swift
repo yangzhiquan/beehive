@@ -10,38 +10,48 @@ import AppKit
 class StatusBarController {
     private var statusBar: NSStatusBar
     private var statusItem: NSStatusItem
-    private var popover: NSPopover
+    private var isShown: Bool = false
+    private var window: NSWindow
     
-    init(_ popover: NSPopover) {
-        self.popover = popover
+    init(_ window: NSWindow) {
+        self.window = window
         statusBar = NSStatusBar.init()
         statusItem = statusBar.statusItem(withLength: 28.0)
         
-        if let statusBarButton = statusItem.button {
-            statusBarButton.image = #imageLiteral(resourceName: "AppIcon") //change this to your desired image
-            statusBarButton.image?.size = NSSize(width: 18.0, height: 18.0)
-            statusBarButton.image?.isTemplate = true
-            statusBarButton.action = #selector(togglePopover(sender:))
-            statusBarButton.target = self
+        
+        if #available(macOS 11.0, *) {
+            statusItem.button?.image = NSImage(systemSymbolName: "circle", accessibilityDescription: nil)
         }
+        statusItem.button?.image?.size = NSSize(width: 18.0, height: 18.0)
+        statusItem.button?.image?.isTemplate = true
+        statusItem.button?.action = #selector(togglePopover(sender:))
+        statusItem.button?.target = self
     }
     
     @objc func togglePopover(sender: AnyObject) {
-        if(popover.isShown) {
+        if(isShown) {
             hidePopover(sender)
         }
         else {
             showPopover(sender)
         }
+        isShown = !isShown
     }
     
     func showPopover(_ sender: AnyObject) {
-        if let statusBarButton = statusItem.button {
-            popover.show(relativeTo: statusBarButton.bounds, of: statusBarButton, preferredEdge: NSRectEdge.maxY)
+        if #available(macOS 11.0, *) {
+            statusItem.button?.image = NSImage(systemSymbolName: "circle.fill", accessibilityDescription: nil)
         }
+        
+        window.makeKeyAndOrderFront(self)
+        NSApplication.shared.activate(ignoringOtherApps: true)
     }
     
     func hidePopover(_ sender: AnyObject) {
-        popover.performClose(sender)
+        if #available(macOS 11.0, *) {
+            statusItem.button?.image = NSImage(systemSymbolName: "circle", accessibilityDescription: nil)
+        }
+        
+        window.orderOut(self)
     }
 }

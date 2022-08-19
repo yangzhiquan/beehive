@@ -4,6 +4,7 @@ import FlutterMacOS
 
 @NSApplicationMain
 class AppDelegate: FlutterAppDelegate {
+    var statusBar: StatusBarController?
 
     override func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
       return false
@@ -15,6 +16,7 @@ class AppDelegate: FlutterAppDelegate {
             
             mainFlutterWindow.setFrame(NSRect(x: Int(frame.size.width - CGFloat(windowWidth)), y: Int(visibleFrame.origin.y), width: windowWidth, height: Int(visibleFrame.size.height)), display: true)
         }
+        statusBar = StatusBarController.init(mainFlutterWindow)
     }
     
     override func applicationDidFinishLaunching(_ aNotification: Notification) {
