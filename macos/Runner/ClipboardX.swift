@@ -15,22 +15,30 @@ class ClipboardX {
     let pasteboard: NSPasteboard = .general
     var lastChangeCount: Int = 0
 
+    private let _history = NSMutableArray()
     
     init() {
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { (t) in
             if self.lastChangeCount != self.pasteboard.changeCount {
                 self.lastChangeCount = self.pasteboard.changeCount
-//                    NotificationCenter.default.post(name: .NSPasteboardDidChange, object: self.pasteboard)
-                print(self.pasteboard.getPlainString() ?? "none")
-                print(self.pasteboard.getImage() ?? "none")
-                print(self.pasteboard.getFileUrl() ?? "none")
+                self.pasteboardChange()
             }
         }
-
     }
     
     deinit {
         timer.invalidate()
+    }
+    
+    private func pasteboardChange() {
+        if let plainString = self.pasteboard.getPlainString() {
+            if _history.count > 0, let lastContent = _history.firstObject as? String, lastContent == plainString {
+                return
+            }
+            _history.remove(plainString)
+            _history.insert(plainString, at: 0)
+            AppManager.shared.sendMsgToFlutter(method: kChannelMethodClipboardChange, args: _history)
+        }
     }
 }
 

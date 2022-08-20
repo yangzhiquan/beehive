@@ -11,6 +11,9 @@ import Foundation
 let appRegistryName: String = "beeHivePlugin"
 let appChannelName: String = "beeHive_channel"
 
+let kChannelMethodClipboardChange: String = "ClipboardChange"
+
+
 class AppManager {
     static let shared = AppManager()
     private var channel: FlutterMethodChannel?
@@ -23,10 +26,14 @@ class AppManager {
         channel?.setMethodCallHandler(flutterMsgHandle)
     }
     
+    public func sendMsgToFlutter(method: String, args: Any?) {
+        channel?.invokeMethod(method, arguments: args)
+    }
+    
     private func flutterMsgHandle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
-        case "getPlatformVersion":
-            result("macOS " + ProcessInfo.processInfo.operatingSystemVersionString)
+        case "init":
+            result("OK")
         default:
             result(FlutterMethodNotImplemented)
         }
