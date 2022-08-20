@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'app_manager.dart';
+import 'component/content.dart';
+import 'component/footer.dart';
+import 'component/menu.dart';
+
 void main() {
   runApp(const MyApp());
+  appMgr.invokeMethod('init');
 }
 
 class MyApp extends StatelessWidget {
@@ -30,38 +36,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    // appMgr.invokeMethod('getPlatformVersion').then((value) => print('flutter received ${value}'));
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+      body: Column(
+        children: const [
+          MenuWidget(),
+          Divider(),
+          ContentWidget(),
+          Divider(),
+          FooterWidget(),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
