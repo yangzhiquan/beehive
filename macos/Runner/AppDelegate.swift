@@ -17,6 +17,8 @@ class AppDelegate: FlutterAppDelegate {
             mainFlutterWindow.setFrame(NSRect(x: Int(frame.size.width - CGFloat(windowWidth)), y: Int(visibleFrame.origin.y), width: windowWidth, height: Int(frame.size.height - visibleFrame.origin.y)), display: true)
         }
         statusBar = StatusBarController.init(mainFlutterWindow)
+        
+        mainFlutterWindow.close()
     }
     
     override func applicationDidFinishLaunching(_ aNotification: Notification) {
