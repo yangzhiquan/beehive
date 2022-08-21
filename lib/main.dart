@@ -41,12 +41,18 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Column(
-        children: const [
-          MenuWidget(),
-          Divider(),
-          ContentWidget(),
-          Divider(),
-          FooterWidget(),
+        children: [
+          Container(color: Colors.black26, child: MenuWidget()),
+          const Divider(
+            height: 0.5,
+            color: Colors.white24,
+          ),
+          const ContentWidget(),
+          const Divider(
+            height: 0.5,
+            color: Colors.white24,
+          ),
+          const FooterWidget(),
         ],
       ),
 // This trailing comma makes auto-formatting nicer for build methods.

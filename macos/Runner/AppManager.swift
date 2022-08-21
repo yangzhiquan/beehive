@@ -11,8 +11,8 @@ import Foundation
 let appRegistryName: String = "beeHivePlugin"
 let appChannelName: String = "beeHive_channel"
 
-let kChannelMethodClipboardChange: String = "ClipboardChange"
-
+let kChannelMethodClipboardChange: String = "ClipboardHasChanged"
+let kChannelMethodClipboardSelected: String = "ClipboardSelected"
 
 class AppManager {
     static let shared = AppManager()
@@ -34,6 +34,10 @@ class AppManager {
         switch call.method {
         case "init":
             result("OK")
+        case kChannelMethodClipboardSelected:
+            if let index = call.arguments as? Int {
+                clipboard.select(index: index)
+            }
         default:
             result(FlutterMethodNotImplemented)
         }

@@ -23,6 +23,10 @@ class ClipboardX {
                 self.lastChangeCount = self.pasteboard.changeCount
                 self.pasteboardChange()
             }
+//            if let str = self.pasteboard.getPlainString()  {
+//                debugPrint(str)
+//            }
+
         }
     }
     
@@ -30,11 +34,19 @@ class ClipboardX {
         timer.invalidate()
     }
     
+    public func select(index: Int) {
+        if index < _history.count, let content = _history[index] as? String {
+            pasteboard.declareTypes([.string], owner: nil)
+            pasteboard.setString(content, forType: .string)
+        }
+    }
+    
     private func pasteboardChange() {
         if let plainString = self.pasteboard.getPlainString() {
             if _history.count > 0, let lastContent = _history.firstObject as? String, lastContent == plainString {
                 return
             }
+            debugPrint("pasteboard change");
             _history.remove(plainString)
             _history.insert(plainString, at: 0)
             AppManager.shared.sendMsgToFlutter(method: kChannelMethodClipboardChange, args: _history)

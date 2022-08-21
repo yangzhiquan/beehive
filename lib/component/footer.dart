@@ -5,9 +5,32 @@ class FooterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 48,
-      color: Colors.grey,
+      child: Row(
+        children: [
+          Card(
+            color: Colors.transparent,
+            child: TextButton(
+                onPressed: () {},
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.settings,
+                      color: Colors.grey,
+                      size: 20,
+                    ),
+                    Text(
+                      '设置',
+                      style: TextStyle(color: Colors.grey, fontSize: 10),
+                    ),
+                  ],
+                )),
+          )
+        ],
+      ),
     );
   }
 }
