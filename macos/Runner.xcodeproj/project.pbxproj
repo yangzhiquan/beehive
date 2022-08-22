@@ -29,6 +29,7 @@
 		3C483C0828AC0E3900BC2FA1 /* ClipboardX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C483C0728AC0E3900BC2FA1 /* ClipboardX.swift */; };
 		3C85F00D289BA99900D029FA /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C85F00C289BA99900D029FA /* StatusBarController.swift */; };
 		3C92E5DF28AB727B00E98428 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C92E5DE28AB727B00E98428 /* AppManager.swift */; };
+		3CAF723C28B365430085A2CA /* native_interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CAF723A28B365430085A2CA /* native_interface.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,9 @@
 		3C483C0728AC0E3900BC2FA1 /* ClipboardX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardX.swift; sourceTree = "<group>"; };
 		3C85F00C289BA99900D029FA /* StatusBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		3C92E5DE28AB727B00E98428 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
+		3CAF723928B365420085A2CA /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
+		3CAF723A28B365430085A2CA /* native_interface.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = native_interface.cpp; sourceTree = "<group>"; };
+		3CAF723B28B365430085A2CA /* native_interface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = native_interface.hpp; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +145,7 @@
 		33FAB671232836740065AC1E /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				3CAF723828B364A90085A2CA /* Bridge */,
 				33CC10F02044A3C60003C045 /* AppDelegate.swift */,
 				33CC11122044BFA00003C045 /* MainFlutterWindow.swift */,
 				3C85F00C289BA99900D029FA /* StatusBarController.swift */,
@@ -152,6 +157,16 @@
 				3C483C0728AC0E3900BC2FA1 /* ClipboardX.swift */,
 			);
 			path = Runner;
+			sourceTree = "<group>";
+		};
+		3CAF723828B364A90085A2CA /* Bridge */ = {
+			isa = PBXGroup;
+			children = (
+				3CAF723A28B365430085A2CA /* native_interface.cpp */,
+				3CAF723B28B365430085A2CA /* native_interface.hpp */,
+				3CAF723928B365420085A2CA /* Runner-Bridging-Header.h */,
+			);
+			path = Bridge;
 			sourceTree = "<group>";
 		};
 		D73912EC22F37F3D000D13A0 /* Frameworks */ = {
@@ -196,7 +211,7 @@
 				TargetAttributes = {
 					33CC10EC2044A3C60003C045 = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1100;
+						LastSwiftMigration = 1330;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
@@ -286,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CAF723C28B365430085A2CA /* native_interface.cpp in Sources */,
 				33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */,
 				3C92E5DF28AB727B00E98428 /* AppManager.swift in Sources */,
 				3C85F00D289BA99900D029FA /* StatusBarController.swift in Sources */,
@@ -381,6 +397,7 @@
 					"@executable_path/../Frameworks",
 				);
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Bridge/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Profile;
@@ -510,6 +527,7 @@
 					"@executable_path/../Frameworks",
 				);
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Bridge/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -531,6 +549,7 @@
 					"@executable_path/../Frameworks",
 				);
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Bridge/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
