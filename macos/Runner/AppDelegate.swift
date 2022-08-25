@@ -11,10 +11,11 @@ class AppDelegate: FlutterAppDelegate {
     }
     
     override func applicationWillFinishLaunching(_ notification: Notification) {
-        if let visibleFrame = NSScreen.main?.visibleFrame, let frame = NSScreen.main?.frame {
+        if let frame = NSScreen.main?.frame {
             let windowWidth = 360
+            let menuBarHeight = NSApplication.shared.mainMenu?.menuBarHeight ?? 24.0
             
-            mainFlutterWindow.setFrame(NSRect(x: Int(frame.size.width - CGFloat(windowWidth)), y: Int(visibleFrame.origin.y), width: windowWidth, height: Int(frame.size.height - visibleFrame.origin.y)), display: true)
+            mainFlutterWindow.setFrame(NSRect(x: Int(frame.size.width - CGFloat(windowWidth)), y: Int(menuBarHeight), width: windowWidth, height: Int(frame.size.height - menuBarHeight)), display: true)
         }
         statusBar = StatusBarController.init(mainFlutterWindow)
         
