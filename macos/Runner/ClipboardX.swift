@@ -46,7 +46,6 @@ class ClipboardX {
             if _history.count > 0, let lastContent = _history.firstObject as? String, lastContent == plainString {
                 return
             }
-            debugPrint("pasteboard change");
             _history.remove(plainString)
             _history.insert(plainString, at: 0)
             AppManager.shared.sendMsgToFlutter(method: kChannelMethodClipboardChange, args: _history)
