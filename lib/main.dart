@@ -1,3 +1,4 @@
+import 'package:beehive/common.dart';
 import 'package:flutter/material.dart';
 
 import 'app_manager.dart';
@@ -52,7 +53,11 @@ class _MyHomePageState extends State<MyHomePage> {
             height: 0.5,
             color: Colors.white24,
           ),
-          const FooterWidget(),
+          FooterWidget(
+            onPressed: (action) {
+              appMgr.invokeMethod(kChannelMethodButtonAction, action.value);
+            },
+          ),
         ],
       ),
 // This trailing comma makes auto-formatting nicer for build methods.

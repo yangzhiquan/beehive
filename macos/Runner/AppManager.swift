@@ -13,6 +13,7 @@ let appChannelName: String = "beeHive_channel"
 
 let kChannelMethodClipboardChange: String = "ClipboardHasChanged"
 let kChannelMethodClipboardSelected: String = "ClipboardSelected"
+let kChannelMethodButtonAction: String = "ButtonAction"
 
 class AppManager {
     static let shared = AppManager()
@@ -34,10 +35,19 @@ class AppManager {
         switch call.method {
         case "init":
             result("OK")
+            break
         case kChannelMethodClipboardSelected:
             if let index = call.arguments as? Int {
                 clipboard.select(index: index)
             }
+            break
+        case kChannelMethodButtonAction:
+            if let action = call.arguments as? String {
+                if action == "setting" {
+                    print("hi~~~~");
+                }
+            }
+            break
         default:
             result(FlutterMethodNotImplemented)
         }

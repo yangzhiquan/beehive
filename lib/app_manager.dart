@@ -7,6 +7,7 @@ import 'clipboard.dart';
 final AppManager appMgr = AppManager.instance;
 
 const String _methodChannelName = 'beeHive_channel';
+const String kChannelMethodButtonAction = 'ButtonAction';
 
 class AppManager {
   static const MethodChannel _channel = MethodChannel(_methodChannelName);

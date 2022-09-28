@@ -1,7 +1,10 @@
+import 'package:beehive/common.dart';
 import 'package:flutter/material.dart';
 
 class FooterWidget extends StatelessWidget {
-  const FooterWidget({Key? key}) : super(key: key);
+  final Function(ButtonAction action) onPressed;
+
+  const FooterWidget({Key? key, required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +15,7 @@ class FooterWidget extends StatelessWidget {
           Card(
             color: Colors.transparent,
             child: TextButton(
-                onPressed: () {},
+                onPressed: () => onPressed(ButtonAction.setting),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
